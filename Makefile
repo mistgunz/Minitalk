@@ -1,4 +1,4 @@
-SOURCES = server.c client.c
+SOURCES = server.c client.c server_bonus.c client_bonus.c 
 OBJECTS = $(SOURCES:.c=.o)
 
 CC = gcc
@@ -6,12 +6,18 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: server client
 
-bonus: server client
+bonus: server_bonus client_bonus
 
 server: server.o libft
 	$(CC) -o $@ $< -Llibft -lft
 
 client: client.o libft
+	$(CC) -o $@ $< -Llibft -lft
+
+server_bonus: server_bonus.o libft
+	$(CC) -o $@ $< -Llibft -lft
+
+client_bonus: client_bonus.o libft
 	$(CC) -o $@ $< -Llibft -lft
 
 %.o: %.c
@@ -25,7 +31,7 @@ clean:
 	make -C libft clean
 	
 fclean: clean
-	rm -f server client libft/libft.a
+	rm -f server client server_bonus client_bonus libft/libft.a
 
 re: fclean all
 
